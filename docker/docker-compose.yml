@@ -24,3 +24,6 @@ services:
     restart: always
     ports:
       - 3306:3306
+    # hostname: sakila
+    # database: sakila
+    # username / password: sakila / p_ssW0rd
