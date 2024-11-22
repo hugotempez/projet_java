@@ -1,0 +1,115 @@
+Dans ce mini-projet deux tâches s’exécutant de façon concurrente
+vont s’échanger des Messages. Une tache (appelée par la suite Tache
+Émettrice) aura pour rôle d'envoyer des Messages et l'autre tache (appelée
+par la suite Tache Réceptrice) aura pour rôle de recevoir ces Messages.
+
+Le canal de communication commun aux deux taches sera un objet de type
+LinkedBlockingDeque (ou de type LinkedBlockingQueue) que vous devrez aller
+découvrir.
+
+
+En fonction de votre niveau, de votre volonté d'apprendre et de votre
+objectif en terme de points, ce mini-projet sera à options :
+
+    - L'Option N°1 - Élémentaire - pourra vous       rapporter
+        au maximum que 09/20,
+    - l'Option N°2 - Intermédiaire - pourra vous rapporter au
+        maximum 14/20,
+    - L'Option N°3 - Avancée - pourra vous rapporter 20/20
+        (dans l’éventualité ou vous atteindriez la perfection)
+
+
+Concernant l'Option N°1 :
+
+    La Tache Émettrice pourra envoyer deux types de Message
+à la Tache Réceptrice. Un premier type de Message (MessageDeDonnees)
+sera constitué de données utiles à la Tache Réceptrice (E.g. des Strings).
+Un second type de Message (MessageDeCommande) sera constitué
+d'information permettant à la Tache Émettrice d'informer la Tache
+Réceptrice qu'elle a terminé d'envoyer des Messages.
+Du coté de la Tache Émettrice vous pourrez découvrir et utiliser la classe Scanner
+(stdin) afin de piloter votre expérimentation.
+
+
+
+Concernant l'Option N°2 :
+
+    Cette option reprendra l'option N°1, mais, au lieu de s’échanger
+des chaines de caractères (String), les taches s’échangeront des données.
+La Tache Émettrice extraira des données de la base de données Sakila
+mise à disposition par MySQL (
+    https://dev.mysql.com/doc/sakila/en/
+    https://github.com/sakiladb/mysql
+    https://hub.docker.com/r/sakiladb/mysql
+)
+Et elle enverra une partie de ces informations à la Tache Réceptrice.
+
+De son coté, la Tache Réceptrice insérera les données reçues (ou un sous
+ensemble) dans une base de données Postgresql.
+
+
+
+Concernant l'Option N°3 :
+
+Cette option reprendra l'option N°2, mais vous mettrez en place un
+Design Pattern très connu qu'est le Design Pattern DAO. A vous de le
+découvrir et de l'utiliser aussi bien du coté de la Tache Émettrice que du
+coté du que du coté de la Tache Réceptrice.
+
+
+Il devra être possible de lancer plusieurs fois votre programme
+sans que celui ci ne plante et sans devoir utiliser Ctrl-C
+pour y mettre fin. Pour cela une réflexion et une analyse des Messages
+échangés entre les deux taches sera indispensable avant de vous lancer
+dans la programmation.
+
+
+D'ici le 20/11/24 (23h59) je vous demande d’échanger entre vous
+afin de constituer 5 équipes de 4 étudiants. Si le 22/11/24
+je n'ai pas toutes les équipes, je n'aurais pas d'autre choix que de
+constituer par moi même et arbitrairement les 5 équipes de 4 étudiants.
+Vous m'enverrez à l'adresse Christophe.Loge@u-picardie.fr la constitution
+de votre équipe
+
+Lors de notre dernière séance du Vendredi 06/12/24, durant
+les deux dernières heures, je rencontrerai chacune des équipes
+à qui je consacrerai (au maximum) 24' afin d'avoir une démonstration de
+compilation et de fonctionnement, une présentation et des explications.
+Afin de m'assurer que chaque coéquipier à travailler et sait parler
+du travaille réalisé je poserai des questions à chaque coéquipier.
+N'abuser donc pas de code dont vous ne serriez pas auteur et/ou de
+code que vous ne seriez pas capable d'expliquer.
+Mieux vaut faire moins tout en apprenant/comprenant plutot qu'en
+faire davantage sans rien comprendre....
+
+
+
+Le rendu sera le suivant :
+    - L’intégralité de votre code-source intelliJ (.java, .bat/.sh, .sql, ...) ,
+    - Les éléments à télécharger et à installer pour tester votre       solution.
+
+Vous supposerez que pour tester votre travail :
+    - Je disposerai :
+
+        - d'un JDK (dans sa version 23),
+        - d'un IntelliJ (dans sa version Ultimate)
+        - de l'outil docker.
+
+    - Je ne disposerai pas :
+        - de MySQL-Sakila
+        - de MySQL et Postgresql (que ce soit installé ou de dockerisé).
+
+
+A vous de me donner toutes les informations nécessaires et suffisantes
+afin que je télécharge, installe, lance ... ce dont j'aurais besoin pour tester
+votre solution (script (.bat, .sh, .sql), dockerfile,       docker-compose....).
+
+Vous déposerez sur un Drive de votre choix toutes ces informations
+zippées dans un fichier portant les noms de familles des coéquipiers.
+Vous m’enverrez au plus tard pour le 20/12/24 23h59 à l'adresse suivante
+christophe.loge@u-picardie.fr
+
+Hors de question pour moi d'aller à la peche aux informations, hors
+de question que j'échange avec vous pour vous demander des autorisations
+de téléchargement, je jugerai ce que vous m'enverrez. Testez donc le (les)
+liens(s) que vous m'envoyez avant de le faire.
