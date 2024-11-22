@@ -10,6 +10,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: example
       POSTGRES_DB: app
+    ports:
+      - 5432:5432
 
   adminer:
     image: adminer
