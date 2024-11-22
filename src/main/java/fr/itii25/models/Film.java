@@ -1,8 +1,19 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "film")
 public class Film {
+
+    @Id
+    @Column(name = "film_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int film_id;
+
+    @Column(name = "title")
     private String title;
+
     private String description;
     private String release_year;
     private int language_id;

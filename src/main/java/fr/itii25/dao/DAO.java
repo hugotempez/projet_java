@@ -1,38 +1,42 @@
 package fr.itii25.dao;
 
-import fr.itii25.db.DatabaseConnection;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.lang.reflect.ParameterizedType;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class DAO<T> {
+public class DAO<T> {
 
-    protected DatabaseConnection connection;
+    protected Connection connection;
 
-    /**
-     * Permet de récupérer un objet via son ID
-     * @param id ID de l'objet à chercher
-     */
-    public abstract T find(long id) throws SQLException;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
-    public abstract List<T> findAll();
+    private Class<T> persistentClass;
 
-    /**
-     * Permet de créer une entrée dans la base de données
-     * par rapport à un objet
-     * @param obj
-     */
-    public abstract boolean create(T obj);
+    public static <T> DAO<T> of(Class<T> persistentClass) {
+        return new DAO<T>(persistentClass);
+    }
 
-    /**
-     * Permet de mettre à jour les données d'une entrée dans la base
-     * @param obj
-     */
-    public abstract boolean update(T obj);
+    private DAO(Class<T> persistentClass) {
+        this.persistentClass = persistentClass;
+    }
 
-    /**
-     * Permet la suppression d'une entrée de la base
-     * @param obj
-     */
-    public abstract boolean delete(T obj);
+    public T find(long id) throws SQLException {
+        return entityManager.find(persistentClass, id);
+    }
+
+    public boolean create(T object) throws SQLException {
+        try {
+            entityManager.persist(object);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
+
 }
