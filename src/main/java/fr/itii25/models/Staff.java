@@ -1,60 +1,85 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = "staff")
 public class Staff {
-    private int staff_id;
-    private String first_name;
-    private String last_name;
-    private int address_id;
+    @Id
+    @Column(name = "staff_id", columnDefinition = "tinyint UNSIGNED not null")
+    private Short id;
+
+    @Column(name = "first_name", nullable = false, length = 45)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 45)
+    private String lastName;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
+    @Column(name = "picture")
+    private byte[] picture;
+
+    @Column(name = "email", length = 50)
     private String email;
-    private int store_id;
-    private int active;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "store_id", nullable = false)
+    private fr.itii25.models.Store store;
+
+    @Column(name = "active", nullable = false)
+    private Boolean active = false;
+
+    @Column(name = "username", nullable = false, length = 16)
     private String username;
+
+    @Column(name = "password", length = 40)
     private String password;
-    private String last_update;
 
-    public Staff(int staff_id, String first_name, String last_name, int address_id, String email, int store_id, int active, String username, String password, String last_update) {
-        this.staff_id = staff_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.address_id = address_id;
-        this.email = email;
-        this.store_id = store_id;
-        this.active = active;
-        this.username = username;
-        this.password = password;
-        this.last_update = last_update;
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Short getId() {
+        return id;
     }
 
-    public int getStaff_id() {
-        return staff_id;
+    public void setId(Short id) {
+        this.id = id;
     }
 
-    public void setStaff_id(int staff_id) {
-        this.staff_id = staff_id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public Address getAddress() {
+        return address;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 
     public String getEmail() {
@@ -65,19 +90,19 @@ public class Staff {
         this.email = email;
     }
 
-    public int getStore_id() {
-        return store_id;
+    public fr.itii25.models.Store getStore() {
+        return store;
     }
 
-    public void setStore_id(int store_id) {
-        this.store_id = store_id;
+    public void setStore(fr.itii25.models.Store store) {
+        this.store = store;
     }
 
-    public int getActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
@@ -97,11 +122,12 @@ public class Staff {
         this.password = password;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }

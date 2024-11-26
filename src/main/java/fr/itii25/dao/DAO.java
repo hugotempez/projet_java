@@ -2,31 +2,39 @@ package fr.itii25.dao;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import java.lang.reflect.ParameterizedType;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class DAO<T> {
 
-    protected Connection connection;
-
     @PersistenceContext
-    protected EntityManager entityManager;
+    static protected EntityManager entityManager;
 
-    private Class<T> persistentClass;
+    private final Class<T> persistentClass;
 
     public static <T> DAO<T> of(Class<T> persistentClass) {
-        return new DAO<T>(persistentClass);
+        return new DAO<>(persistentClass);
     }
 
     private DAO(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
+
+        if (entityManager == null) {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("projet_java");
+            entityManager = emf.createEntityManager();
+        }
     }
 
-    public T find(long id) throws SQLException {
+    public T find(int id) throws SQLException {
         return entityManager.find(persistentClass, id);
+    }
+
+    public List<T> findAll() throws SQLException {
+        return entityManager.createQuery("from " + persistentClass.getSimpleName()).getResultList();
     }
 
     public boolean create(T object) throws SQLException {

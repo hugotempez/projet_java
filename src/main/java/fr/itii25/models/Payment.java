@@ -1,77 +1,91 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.Instant;
+
+@Entity
+@Table(name = "payment")
 public class Payment {
-    private int payment_id;
-    private int customer_id;
-    private int staff_id;
-    private int rental_id;
-    private double amount;
-    private String payment_date;
-    private String last_update;
+    @Id
+    @Column(name = "payment_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
 
-    public Payment(int payment_id, int customer_id, int staff_id, int rental_id, double amount, String payment_date, String last_update) {
-        this.payment_id = payment_id;
-        this.customer_id = customer_id;
-        this.staff_id = staff_id;
-        this.rental_id = rental_id;
-        this.amount = amount;
-        this.payment_date = payment_date;
-        this.last_update = last_update;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "staff_id", nullable = false)
+    private fr.itii25.models.Staff staff;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rental_id")
+    private fr.itii25.models.Rental rental;
+
+    @Column(name = "amount", nullable = false, precision = 5, scale = 2)
+    private BigDecimal amount;
+
+    @Column(name = "payment_date", nullable = false)
+    private Instant paymentDate;
+
+    @Column(name = "last_update")
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getPayment_id() {
-        return payment_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setPayment_id(int payment_id) {
-        this.payment_id = payment_id;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public fr.itii25.models.Staff getStaff() {
+        return staff;
     }
 
-    public int getStaff_id() {
-        return staff_id;
+    public void setStaff(fr.itii25.models.Staff staff) {
+        this.staff = staff;
     }
 
-    public void setStaff_id(int staff_id) {
-        this.staff_id = staff_id;
+    public fr.itii25.models.Rental getRental() {
+        return rental;
     }
 
-    public int getRental_id() {
-        return rental_id;
+    public void setRental(fr.itii25.models.Rental rental) {
+        this.rental = rental;
     }
 
-    public void setRental_id(int rental_id) {
-        this.rental_id = rental_id;
-    }
-
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public String getPayment_date() {
-        return payment_date;
+    public Instant getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setPayment_date(String payment_date) {
-        this.payment_date = payment_date;
+    public void setPaymentDate(Instant paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }

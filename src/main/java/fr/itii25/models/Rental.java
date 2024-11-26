@@ -1,77 +1,90 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = "rental")
 public class Rental {
-    private int rental_id;
-    private String rental_date;
-    private int inventory_id;
-    private int customer_id;
-    private String return_date;
-    private int staff_id;
-    private String last_update;
+    @Id
+    @Column(name = "rental_id", nullable = false)
+    private Integer id;
 
-    public Rental(int rental_id, String rental_date, int inventory_id, int customer_id, String return_date, int staff_id, String last_update) {
-        this.rental_id = rental_id;
-        this.rental_date = rental_date;
-        this.inventory_id = inventory_id;
-        this.customer_id = customer_id;
-        this.return_date = return_date;
-        this.staff_id = staff_id;
-        this.last_update = last_update;
+    @Column(name = "rental_date", nullable = false)
+    private Instant rentalDate;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "inventory_id", nullable = false)
+    private Inventory inventory;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @Column(name = "return_date")
+    private Instant returnDate;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "staff_id", nullable = false)
+    private fr.itii25.models.Staff staff;
+
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getRental_id() {
-        return rental_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setRental_id(int rental_id) {
-        this.rental_id = rental_id;
+    public Instant getRentalDate() {
+        return rentalDate;
     }
 
-    public String getRental_date() {
-        return rental_date;
+    public void setRentalDate(Instant rentalDate) {
+        this.rentalDate = rentalDate;
     }
 
-    public void setRental_date(String rental_date) {
-        this.rental_date = rental_date;
+    public Inventory getInventory() {
+        return inventory;
     }
 
-    public int getInventory_id() {
-        return inventory_id;
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
-    public void setInventory_id(int inventory_id) {
-        this.inventory_id = inventory_id;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public Instant getReturnDate() {
+        return returnDate;
     }
 
-    public String getReturn_date() {
-        return return_date;
+    public void setReturnDate(Instant returnDate) {
+        this.returnDate = returnDate;
     }
 
-    public void setReturn_date(String return_date) {
-        this.return_date = return_date;
+    public fr.itii25.models.Staff getStaff() {
+        return staff;
     }
 
-    public int getStaff_id() {
-        return staff_id;
+    public void setStaff(fr.itii25.models.Staff staff) {
+        this.staff = staff;
     }
 
-    public void setStaff_id(int staff_id) {
-        this.staff_id = staff_id;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
-    }
 }

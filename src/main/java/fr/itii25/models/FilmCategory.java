@@ -4,28 +4,29 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "inventory")
-public class Inventory {
-    @Id
-    @Column(name = "inventory_id", nullable = false)
-    private Integer id;
+@Table(name = "film_category")
+public class FilmCategory {
+    @EmbeddedId
+    private FilmCategoryId id;
 
+    @MapsId("filmId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;
 
+    @MapsId("categoryId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
-    private fr.itii25.models.Store store;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    public Integer getId() {
+    public FilmCategoryId getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(FilmCategoryId id) {
         this.id = id;
     }
 
@@ -37,12 +38,12 @@ public class Inventory {
         this.film = film;
     }
 
-    public fr.itii25.models.Store getStore() {
-        return store;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setStore(fr.itii25.models.Store store) {
-        this.store = store;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Instant getLastUpdate() {

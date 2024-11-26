@@ -1,58 +1,71 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = "customer")
 public class Customer {
-    private int customer_id;
-    private int store_id;
-    private String first_name;
-    private String last_name;
+    @Id
+    @Column(name = "customer_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "store_id", nullable = false)
+    private fr.itii25.models.Store store;
+
+    @Column(name = "first_name", nullable = false, length = 45)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 45)
+    private String lastName;
+
+    @Column(name = "email", length = 50)
     private String email;
-    private int address_id;
-    private int active;
-    private String create_date;
-    private String last_update;
 
-    public Customer(int customer_id, int store_id, String first_name, String last_name, String email, int address_id, int active, String create_date, String last_update) {
-        this.customer_id = customer_id;
-        this.store_id = store_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.address_id = address_id;
-        this.active = active;
-        this.create_date = create_date;
-        this.last_update = last_update;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
+    @Column(name = "active", nullable = false)
+    private Boolean active = false;
+
+    @Column(name = "create_date", nullable = false)
+    private Instant createDate;
+
+    @Column(name = "last_update")
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public fr.itii25.models.Store getStore() {
+        return store;
     }
 
-    public int getStore_id() {
-        return store_id;
+    public void setStore(fr.itii25.models.Store store) {
+        this.store = store;
     }
 
-    public void setStore_id(int store_id) {
-        this.store_id = store_id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -63,35 +76,36 @@ public class Customer {
         this.email = email;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public int getActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
-    public String getCreate_date() {
-        return create_date;
+    public Instant getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }

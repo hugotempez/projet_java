@@ -1,53 +1,63 @@
 package fr.itii25.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.Instant;
 
 @Entity
 @Table(name = "film")
 public class Film {
-
     @Id
-    @Column(name = "film_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int film_id;
+    @Column(name = "film_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false, length = 128)
     private String title;
 
+    @Lob
+    @Column(name = "description")
     private String description;
-    private String release_year;
-    private int language_id;
-    private int original_language_id;
-    private int rental_duration;
-    private double rental_rate;
-    private int length;
-    private double replacement_cost;
+
+    @Column(name = "release_year")
+    private Integer releaseYear;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "language_id", nullable = false)
+    private fr.itii25.models.Language language;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "original_language_id")
+    private fr.itii25.models.Language originalLanguage;
+
+    @Column(name = "rental_duration", columnDefinition = "tinyint UNSIGNED not null")
+    private Short rentalDuration;
+
+    @Column(name = "rental_rate", nullable = false, precision = 4, scale = 2)
+    private BigDecimal rentalRate;
+
+    @Column(name = "length", columnDefinition = "smallint UNSIGNED")
+    private Integer length;
+
+    @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
+    private BigDecimal replacementCost;
+
+    @Lob
+    @Column(name = "rating")
     private String rating;
-    private String special_features;
-    private String last_update;
 
-    public Film(int film_id, String title, String description, String release_year, int language_id, int original_language_id, int rental_duration, double rental_rate, int length, double replacement_cost, String rating, String special_features, String last_update) {
-        this.film_id = film_id;
-        this.title = title;
-        this.description = description;
-        this.release_year = release_year;
-        this.language_id = language_id;
-        this.original_language_id = original_language_id;
-        this.rental_duration = rental_duration;
-        this.rental_rate = rental_rate;
-        this.length = length;
-        this.replacement_cost = replacement_cost;
-        this.rating = rating;
-        this.special_features = special_features;
-        this.last_update = last_update;
+    @Lob
+    @Column(name = "special_features")
+    private String specialFeatures;
+
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getFilm_id() {
-        return film_id;
-    }
-
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -66,60 +76,60 @@ public class Film {
         this.description = description;
     }
 
-    public String getRelease_year() {
-        return release_year;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setRelease_year(String release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
-    public int getLanguage_id() {
-        return language_id;
+    public fr.itii25.models.Language getLanguage() {
+        return language;
     }
 
-    public void setLanguage_id(int language_id) {
-        this.language_id = language_id;
+    public void setLanguage(fr.itii25.models.Language language) {
+        this.language = language;
     }
 
-    public int getOriginal_language_id() {
-        return original_language_id;
+    public fr.itii25.models.Language getOriginalLanguage() {
+        return originalLanguage;
     }
 
-    public void setOriginal_language_id(int original_language_id) {
-        this.original_language_id = original_language_id;
+    public void setOriginalLanguage(fr.itii25.models.Language originalLanguage) {
+        this.originalLanguage = originalLanguage;
     }
 
-    public int getRental_duration() {
-        return rental_duration;
+    public Short getRentalDuration() {
+        return rentalDuration;
     }
 
-    public void setRental_duration(int rental_duration) {
-        this.rental_duration = rental_duration;
+    public void setRentalDuration(Short rentalDuration) {
+        this.rentalDuration = rentalDuration;
     }
 
-    public double getRental_rate() {
-        return rental_rate;
+    public BigDecimal getRentalRate() {
+        return rentalRate;
     }
 
-    public void setRental_rate(int rental_rate) {
-        this.rental_rate = rental_rate;
+    public void setRentalRate(BigDecimal rentalRate) {
+        this.rentalRate = rentalRate;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
-    public double getReplacement_cost() {
-        return replacement_cost;
+    public BigDecimal getReplacementCost() {
+        return replacementCost;
     }
 
-    public void setReplacement_cost(double replacement_cost) {
-        this.replacement_cost = replacement_cost;
+    public void setReplacementCost(BigDecimal replacementCost) {
+        this.replacementCost = replacementCost;
     }
 
     public String getRating() {
@@ -130,19 +140,20 @@ public class Film {
         this.rating = rating;
     }
 
-    public String getSpecial_features() {
-        return special_features;
+    public String getSpecialFeatures() {
+        return specialFeatures;
     }
 
-    public void setSpecial_features(String special_features) {
-        this.special_features = special_features;
+    public void setSpecialFeatures(String specialFeatures) {
+        this.specialFeatures = specialFeatures;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }

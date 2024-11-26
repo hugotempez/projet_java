@@ -1,34 +1,43 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = "address")
 public class Address {
-    private int address_id;
+    @Id
+    @Column(name = "address_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
+
+    @Column(name = "address", nullable = false, length = 50)
     private String address;
+
+    @Column(name = "address2", length = 50)
     private String address2;
+
+    @Column(name = "district", nullable = false, length = 20)
     private String district;
-    private int city_id;
-    private String postal_code;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    private fr.itii25.models.City city;
+
+    @Column(name = "postal_code", length = 10)
+    private String postalCode;
+
+    @Column(name = "phone", nullable = false, length = 20)
     private String phone;
-    private String location;
-    private String last_update;
 
-    public Address(int address_id, String address, String address2, String district, int city_id, String postal_code, String phone, String location, String last_update) {
-        this.address_id = address_id;
-        this.address = address;
-        this.address2 = address2;
-        this.district = district;
-        this.city_id = city_id;
-        this.postal_code = postal_code;
-        this.phone = phone;
-        this.location = location;
-        this.last_update = last_update;
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getAddress_id() {
-        return address_id;
-    }
-
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -55,20 +64,20 @@ public class Address {
         this.district = district;
     }
 
-    public int getCity_id() {
-        return city_id;
+    public fr.itii25.models.City getCity() {
+        return city;
     }
 
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
+    public void setCity(fr.itii25.models.City city) {
+        this.city = city;
     }
 
-    public String getPostal_code() {
-        return postal_code;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getPhone() {
@@ -79,19 +88,18 @@ public class Address {
         this.phone = phone;
     }
 
-    public String getLocation() {
-        return location;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
-    public String getLast_update() {
-        return last_update;
-    }
-
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
-    }
+/*
+ TODO [Reverse Engineering] create field to map the 'location' column
+ Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Column(name = "location", columnDefinition = "geometry not null")
+    private Object location;
+*/
 }

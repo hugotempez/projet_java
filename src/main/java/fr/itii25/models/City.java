@@ -1,24 +1,31 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = "city")
 public class City {
-    private int city_id;
+    @Id
+    @Column(name = "city_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
+
+    @Column(name = "city", nullable = false, length = 50)
     private String city;
-    private int country_id;
-    private String last_update;
 
-    public City(int city_id, String city, int country_id, String last_update) {
-        this.city_id = city_id;
-        this.city = city;
-        this.country_id = country_id;
-        this.last_update = last_update;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "country_id", nullable = false)
+    private fr.itii25.models.Country country;
+
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getCity_id() {
-        return city_id;
-    }
-
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCity() {
@@ -29,19 +36,20 @@ public class City {
         this.city = city;
     }
 
-    public int getCountry_id() {
-        return country_id;
+    public fr.itii25.models.Country getCountry() {
+        return country;
     }
 
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
+    public void setCountry(fr.itii25.models.Country country) {
+        this.country = country;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }
