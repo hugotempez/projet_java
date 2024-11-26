@@ -1,22 +1,30 @@
 package fr.itii25.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.Instant;
+
+@Entity
+@Table(name = "country")
 public class Country {
-    private int country_id;
+    @Id
+    @Column(name = "country_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
+
+    @Column(name = "country", nullable = false, length = 50)
     private String country;
-    private String last_update;
 
-    public Country(int country_id, String country, String last_update) {
-        this.country_id = country_id;
-        this.country = country;
-        this.last_update = last_update;
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getCountry_id() {
-        return country_id;
-    }
-
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCountry() {
@@ -27,11 +35,12 @@ public class Country {
         this.country = country;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }

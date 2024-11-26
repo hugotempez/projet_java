@@ -1,47 +1,58 @@
 package fr.itii25.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.sql.Timestamp;
+import java.time.Instant;
+
+@Entity
+@Table(name = "actor")
 public class Actor {
-    private int actor_id;
-    private String first_name;
-    private String last_name;
-    private String last_update;
+    @Id
+    @Column(name = "actor_id", columnDefinition = "smallint UNSIGNED not null")
+    private Integer id;
 
-    public Actor(int actor_id, String first_name, String last_name, String last_update) {
-        this.actor_id = actor_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.last_update = last_update;
+    @Column(name = "first_name", nullable = false, length = 45)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 45)
+    private String lastName;
+
+    @Column(name = "last_update", nullable = false)
+    private Timestamp lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getActor_id() {
-        return actor_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setActor_id(int actor_id) {
-        this.actor_id = actor_id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
-    }
 }

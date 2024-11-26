@@ -1,47 +1,56 @@
 package fr.itii25.models;
 
+import javax.persistence.*;
+import java.time.Instant;
+
+@Entity
+@Table(name = "store")
 public class Store {
-    private int store_id;
-    private int manager_staff_id;
-    private int address_id;
-    private String last_update;
+    @Id
+    @Column(name = "store_id", columnDefinition = "tinyint UNSIGNED not null")
+    private Short id;
 
-    public Store(int store_id, int manager_staff_id, int address_id, String last_update) {
-        this.store_id = store_id;
-        this.manager_staff_id = manager_staff_id;
-        this.address_id = address_id;
-        this.last_update = last_update;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "manager_staff_id", nullable = false)
+    private Staff managerStaff;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Short getId() {
+        return id;
     }
 
-    public int getStore_id() {
-        return store_id;
+    public void setId(Short id) {
+        this.id = id;
     }
 
-    public void setStore_id(int store_id) {
-        this.store_id = store_id;
+    public Staff getManagerStaff() {
+        return managerStaff;
     }
 
-    public int getManager_staff_id() {
-        return manager_staff_id;
+    public void setManagerStaff(Staff managerStaff) {
+        this.managerStaff = managerStaff;
     }
 
-    public void setManager_staff_id(int manager_staff_id) {
-        this.manager_staff_id = manager_staff_id;
+    public Address getAddress() {
+        return address;
     }
 
-    public int getAddress_id() {
-        return address_id;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
-    }
 }

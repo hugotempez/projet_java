@@ -1,30 +1,30 @@
 package fr.itii25.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.Instant;
+
+@Entity
+@Table(name = "category")
 public class Category {
-    private int category_id;
+    @Id
+    @Column(name = "category_id", columnDefinition = "tinyint UNSIGNED not null")
+    private Integer id;
+
+    @Column(name = "name", nullable = false, length = 25)
     private String name;
-    private String last_update;
 
-    public Category(int category_id, String name, String last_update) {
-        this.category_id = category_id;
-        this.name = name;
-        this.last_update = last_update;
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
-
-    public String getLast_update() {
-        return last_update;
-    }
-
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,4 +34,13 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Instant getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
 }

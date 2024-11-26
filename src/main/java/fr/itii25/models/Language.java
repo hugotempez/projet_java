@@ -1,22 +1,30 @@
 package fr.itii25.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.Instant;
+
+@Entity
+@Table(name = "language")
 public class Language {
-    private int language_id;
+    @Id
+    @Column(name = "language_id", columnDefinition = "tinyint UNSIGNED not null")
+    private Short id;
+
+    @Column(name = "name", nullable = false, length = 20)
     private String name;
-    private String last_update;
 
-    public Language(int language_id, String name, String last_update) {
-        this.language_id = language_id;
-        this.name = name;
-        this.last_update = last_update;
+    @Column(name = "last_update", nullable = false)
+    private Instant lastUpdate;
+
+    public Short getId() {
+        return id;
     }
 
-    public int getLanguage_id() {
-        return language_id;
-    }
-
-    public void setLanguage_id(int language_id) {
-        this.language_id = language_id;
+    public void setId(Short id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -27,11 +35,12 @@ public class Language {
         this.name = name;
     }
 
-    public String getLast_update() {
-        return last_update;
+    public Instant getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
+
 }
