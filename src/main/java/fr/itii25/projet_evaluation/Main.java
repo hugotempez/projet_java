@@ -2,20 +2,18 @@ package fr.itii25.projet_evaluation;
 
 import fr.itii25.dao.DAO;
 import fr.itii25.models.Film;
+import fr.itii25.tasks.ThreadEmetteur;
 
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        DAO<Film> dao = DAO.of(Film.class);
+        ThreadEmetteur thread = new ThreadEmetteur();
+        thread.start();
         try {
-            System.out.println(dao.findAll());
-            Film film = dao.find(1);
-            System.out.println(film);
-            film.getActors().forEach(System.out::println);
-        } catch (SQLException e) {
+            thread.join();
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
