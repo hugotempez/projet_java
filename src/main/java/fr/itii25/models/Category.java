@@ -1,17 +1,16 @@
 package fr.itii25.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
 public class Category {
     @Id
     @Column(name = "category_id", columnDefinition = "tinyint UNSIGNED not null")
-    private Integer id;
+    private Short id;
 
     @Column(name = "name", nullable = false, length = 25)
     private String name;
@@ -19,11 +18,14 @@ public class Category {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    public Integer getId() {
+    @ManyToMany(mappedBy = "categories")
+    private Set<Film> films = new LinkedHashSet<>();
+
+    public Short getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Short id) {
         this.id = id;
     }
 
@@ -41,6 +43,14 @@ public class Category {
 
     public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilmCategories(Set<Film> films) {
+        this.films = films;
     }
 
 }

@@ -8,20 +8,13 @@ import java.time.Instant;
 @Table(name = "payment")
 public class Payment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "staff_id", nullable = false)
-    private fr.itii25.models.Staff staff;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rental_id")
-    private fr.itii25.models.Rental rental;
 
     @Column(name = "amount", nullable = false, precision = 5, scale = 2)
     private BigDecimal amount;
@@ -46,22 +39,6 @@ public class Payment {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public fr.itii25.models.Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(fr.itii25.models.Staff staff) {
-        this.staff = staff;
-    }
-
-    public fr.itii25.models.Rental getRental() {
-        return rental;
-    }
-
-    public void setRental(fr.itii25.models.Rental rental) {
-        this.rental = rental;
     }
 
     public BigDecimal getAmount() {

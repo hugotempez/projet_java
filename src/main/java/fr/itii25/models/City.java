@@ -7,15 +7,12 @@ import java.time.Instant;
 @Table(name = "city")
 public class City {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
 
     @Column(name = "city", nullable = false, length = 50)
     private String city;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "country_id", nullable = false)
-    private fr.itii25.models.Country country;
 
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
@@ -34,14 +31,6 @@ public class City {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public fr.itii25.models.Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(fr.itii25.models.Country country) {
-        this.country = country;
     }
 
     public Instant getLastUpdate() {

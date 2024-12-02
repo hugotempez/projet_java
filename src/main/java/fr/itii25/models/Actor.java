@@ -1,16 +1,15 @@
 package fr.itii25.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.sql.Timestamp;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "actor")
 public class Actor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
 
@@ -21,7 +20,10 @@ public class Actor {
     private String lastName;
 
     @Column(name = "last_update", nullable = false)
-    private Timestamp lastUpdate;
+    private Instant lastUpdate;
+
+    @ManyToMany(mappedBy = "actors")
+    private Set<Film> films = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -47,11 +49,11 @@ public class Actor {
         this.lastName = lastName;
     }
 
-    public Timestamp getLastUpdate() {
+    public Instant getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

@@ -7,12 +7,9 @@ import java.time.Instant;
 @Table(name = "customer")
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
-    private fr.itii25.models.Store store;
 
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
@@ -42,14 +39,6 @@ public class Customer {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public fr.itii25.models.Store getStore() {
-        return store;
-    }
-
-    public void setStore(fr.itii25.models.Store store) {
-        this.store = store;
     }
 
     public String getFirstName() {

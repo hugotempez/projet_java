@@ -3,11 +3,14 @@ package fr.itii25.models;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "film")
 public class Film {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
 
@@ -20,14 +23,6 @@ public class Film {
 
     @Column(name = "release_year")
     private Integer releaseYear;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "language_id", nullable = false)
-    private fr.itii25.models.Language language;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "original_language_id")
-    private fr.itii25.models.Language originalLanguage;
 
     @Column(name = "rental_duration", columnDefinition = "tinyint UNSIGNED not null")
     private Short rentalDuration;
@@ -51,6 +46,25 @@ public class Film {
 
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private Set<Actor> actors = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_category",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "film")
+    private Set<fr.itii25.models.Inventory> inventories = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -82,22 +96,6 @@ public class Film {
 
     public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
-    }
-
-    public fr.itii25.models.Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(fr.itii25.models.Language language) {
-        this.language = language;
-    }
-
-    public fr.itii25.models.Language getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setOriginalLanguage(fr.itii25.models.Language originalLanguage) {
-        this.originalLanguage = originalLanguage;
     }
 
     public Short getRentalDuration() {
@@ -156,4 +154,15 @@ public class Film {
         this.lastUpdate = lastUpdate;
     }
 
+    public Set<fr.itii25.models.Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(Set<fr.itii25.models.Inventory> inventories) {
+        this.inventories = inventories;
+    }
+
+    public Set<Actor> getActors() {
+        return actors;
+    }
 }

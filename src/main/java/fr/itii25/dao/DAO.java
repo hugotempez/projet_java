@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class DAO<T> {
         this.persistentClass = persistentClass;
 
         if (entityManager == null) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("projet_java");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("input_sakila");
             entityManager = emf.createEntityManager();
         }
     }

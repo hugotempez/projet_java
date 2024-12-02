@@ -7,6 +7,7 @@ import java.time.Instant;
 @Table(name = "rental")
 public class Rental {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rental_id", nullable = false)
     private Integer id;
 
@@ -23,10 +24,6 @@ public class Rental {
 
     @Column(name = "return_date")
     private Instant returnDate;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "staff_id", nullable = false)
-    private fr.itii25.models.Staff staff;
 
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
@@ -69,14 +66,6 @@ public class Rental {
 
     public void setReturnDate(Instant returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public fr.itii25.models.Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(fr.itii25.models.Staff staff) {
-        this.staff = staff;
     }
 
     public Instant getLastUpdate() {

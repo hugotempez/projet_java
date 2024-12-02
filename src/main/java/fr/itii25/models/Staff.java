@@ -26,10 +26,6 @@ public class Staff {
     @Column(name = "email", length = 50)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
-    private fr.itii25.models.Store store;
-
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 
@@ -88,14 +84,6 @@ public class Staff {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public fr.itii25.models.Store getStore() {
-        return store;
-    }
-
-    public void setStore(fr.itii25.models.Store store) {
-        this.store = store;
     }
 
     public Boolean getActive() {

@@ -1,15 +1,13 @@
 package fr.itii25.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
 @Table(name = "country")
 public class Country {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
 

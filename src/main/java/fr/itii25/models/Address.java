@@ -7,6 +7,7 @@ import java.time.Instant;
 @Table(name = "address")
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id", columnDefinition = "smallint UNSIGNED not null")
     private Integer id;
 
@@ -18,10 +19,6 @@ public class Address {
 
     @Column(name = "district", nullable = false, length = 20)
     private String district;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
-    private fr.itii25.models.City city;
 
     @Column(name = "postal_code", length = 10)
     private String postalCode;
@@ -62,14 +59,6 @@ public class Address {
 
     public void setDistrict(String district) {
         this.district = district;
-    }
-
-    public fr.itii25.models.City getCity() {
-        return city;
-    }
-
-    public void setCity(fr.itii25.models.City city) {
-        this.city = city;
     }
 
     public String getPostalCode() {
