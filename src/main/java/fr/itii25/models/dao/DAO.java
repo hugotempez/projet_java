@@ -1,4 +1,4 @@
-package fr.itii25.dao;
+package fr.itii25.models.dao;
 
 
 import javax.persistence.EntityManager;
