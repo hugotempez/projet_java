@@ -9,7 +9,7 @@ import java.time.Instant;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id", columnDefinition = "smallint UNSIGNED not null")
+    @Column(name = "payment_id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

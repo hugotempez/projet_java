@@ -1,6 +1,11 @@
 package fr.itii25.models.dao;
 
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,8 +16,9 @@ import java.util.List;
 public class DAO<T> {
 
     @PersistenceContext
-    static protected EntityManager entityManager;
+    protected EntityManager entityManager;
     private final String persistenceUnitName;
+    private final SessionFactory sessionFactory;
 
     private final Class<T> persistentClass;
 
@@ -23,10 +29,11 @@ public class DAO<T> {
     private DAO(Class<T> persistentClass, String persistenceUnitName) {
         this.persistentClass = persistentClass;
         this.persistenceUnitName = persistenceUnitName;
-        if (entityManager == null) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
-            entityManager = emf.createEntityManager();
-        }
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+        entityManager = emf.createEntityManager();
+        Configuration config = new Configuration();
+        config.addClass(persistentClass);
+        sessionFactory = config.buildSessionFactory();
     }
 
     public T find(int id) throws SQLException {
@@ -38,13 +45,36 @@ public class DAO<T> {
     }
 
     public boolean create(T object) throws SQLException {
+        //entityManager.merge(object);
+//        entityManager.getTransaction().begin();
+//
+//        try {
+//            entityManager.persist(object);
+//            entityManager.getTransaction().commit();
+//            System.out.println("Created: " + object);
+//            return true;
+//        } catch (Exception e) {
+//            entityManager.getTransaction().rollback();
+//            e.printStackTrace();
+//            return false;
+//        }
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
         try {
-            entityManager.persist(object);
+            tx = session.beginTransaction();
+            session.save(object);
+            session.flush();
+            tx.commit();
             return true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw e;
+        } finally {
+            session.close();
         }
-        catch (Exception e) {
-            return false;
-        }
-    }
+        //sessionFactory.close();
+}
 
 }

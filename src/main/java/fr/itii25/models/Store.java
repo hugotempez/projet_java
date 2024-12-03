@@ -7,7 +7,7 @@ import java.time.Instant;
 @Table(name = "store")
 public class Store {
     @Id
-    @Column(name = "store_id", columnDefinition = "tinyint UNSIGNED not null")
+    @Column(name = "store_id")
     private Short id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(name = "category")
 public class Category {
     @Id
-    @Column(name = "category_id", columnDefinition = "tinyint UNSIGNED not null")
+    @Column(name = "category_id")
     private Short id;
 
     @Column(name = "name", nullable = false, length = 25)
@@ -18,7 +18,7 @@ public class Category {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.MERGE)
     private Set<Film> films = new LinkedHashSet<>();
 
     public Short getId() {

@@ -7,7 +7,7 @@ import java.time.Instant;
 @Table(name = "staff")
 public class Staff {
     @Id
-    @Column(name = "staff_id", columnDefinition = "tinyint UNSIGNED not null")
+    @Column(name = "staff_id")
     private Short id;
 
     @Column(name = "first_name", nullable = false, length = 45)

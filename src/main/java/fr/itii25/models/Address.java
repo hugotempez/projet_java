@@ -8,7 +8,7 @@ import java.time.Instant;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id", columnDefinition = "smallint UNSIGNED not null")
+    @Column(name = "address_id")
     private Integer id;
 
     @Column(name = "address", nullable = false, length = 50)

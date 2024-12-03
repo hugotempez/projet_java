@@ -9,8 +9,8 @@ import java.util.Set;
 @Table(name = "actor")
 public class Actor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "actor_id", columnDefinition = "smallint UNSIGNED not null")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "actor_id")
     private Integer id;
 
     @Column(name = "first_name", nullable = false, length = 45)
@@ -22,7 +22,7 @@ public class Actor {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.MERGE)
     private Set<Film> films = new LinkedHashSet<>();
 
     public Integer getId() {

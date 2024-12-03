@@ -8,7 +8,7 @@ import java.time.Instant;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id", columnDefinition = "smallint UNSIGNED not null")
+    @Column(name = "country_id")
     private Integer id;
 
     @Column(name = "country", nullable = false, length = 50)

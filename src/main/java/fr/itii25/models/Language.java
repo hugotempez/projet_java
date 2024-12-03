@@ -10,7 +10,7 @@ import java.time.Instant;
 @Table(name = "language")
 public class Language {
     @Id
-    @Column(name = "language_id", columnDefinition = "tinyint UNSIGNED not null")
+    @Column(name = "language_id")
     private Short id;
 
     @Column(name = "name", nullable = false, length = 20)

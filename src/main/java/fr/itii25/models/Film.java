@@ -11,7 +11,7 @@ import java.util.Set;
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id", columnDefinition = "smallint UNSIGNED not null")
+    @Column(name = "film_id")
     private Integer id;
 
     @Column(name = "title", nullable = false, length = 128)
@@ -24,13 +24,13 @@ public class Film {
     @Column(name = "release_year")
     private Integer releaseYear;
 
-    @Column(name = "rental_duration", columnDefinition = "tinyint UNSIGNED not null")
+    @Column(name = "rental_duration")
     private Short rentalDuration;
 
     @Column(name = "rental_rate", nullable = false, precision = 4, scale = 2)
     private BigDecimal rentalRate;
 
-    @Column(name = "length", columnDefinition = "smallint UNSIGNED")
+    @Column(name = "length")
     private Integer length;
 
     @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
@@ -47,7 +47,7 @@ public class Film {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "film_actor",
             joinColumns = @JoinColumn(name = "film_id"),
@@ -55,7 +55,7 @@ public class Film {
     )
     private Set<Actor> actors = new LinkedHashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "film_category",
             joinColumns = @JoinColumn(name = "film_id"),
@@ -63,7 +63,7 @@ public class Film {
     )
     private Set<Category> categories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", cascade = CascadeType.MERGE)
     private Set<fr.itii25.models.Inventory> inventories = new LinkedHashSet<>();
 
     public Integer getId() {
