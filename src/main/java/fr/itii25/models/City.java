@@ -7,7 +7,7 @@ import java.time.Instant;
 @Table(name = "city")
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private Integer id;
 

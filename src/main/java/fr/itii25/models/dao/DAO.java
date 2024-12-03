@@ -11,7 +11,6 @@ public class DAO<T> {
 
     @PersistenceContext
     protected EntityManager entityManager;
-    private final String persistenceUnitName;
 
     private final Class<T> persistentClass;
 
@@ -21,7 +20,6 @@ public class DAO<T> {
 
     private DAO(Class<T> persistentClass, String persistenceUnitName) {
         this.persistentClass = persistentClass;
-        this.persistenceUnitName = persistenceUnitName;
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
         entityManager = emf.createEntityManager();
     }
@@ -51,5 +49,4 @@ public class DAO<T> {
             return false;
         }
     }
-
 }
