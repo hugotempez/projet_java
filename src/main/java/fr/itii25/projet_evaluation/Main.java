@@ -12,7 +12,7 @@ public class Main {
 
         emetteur.start();
         recepteur.start();
-
+        //TODO: utiliser des Locks pour gérer l'affichage ?
         try {
             emetteur.join();
             recepteur.join();

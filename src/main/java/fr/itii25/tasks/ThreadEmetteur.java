@@ -15,15 +15,9 @@ import java.util.List;
 
 
 public class ThreadEmetteur extends Task {
-    private DAO<Actor> daoActor;
-    private DAO<Category> daoCategory;
-    private DAO<Film> daoFilm;
     private EventManager eventManager;
 
     public ThreadEmetteur() {
-        daoActor = DAO.of(Actor.class, "input_sakila");
-        daoCategory = DAO.of(Category.class, "input_sakila");
-        daoFilm = DAO.of(Film.class, "input_sakila");
         eventManager = new EventManager();
     }
 
@@ -38,7 +32,6 @@ public class ThreadEmetteur extends Task {
     @Override
     public void run() {
         this.running = true;
-
         while (running) {
             System.out.println("\n=== Menu ===");
             System.out.println("1. Actor");
@@ -47,7 +40,6 @@ public class ThreadEmetteur extends Task {
 
             String choix = System.console().readLine();
 
-            Command command = null;
             switch (choix) {
                 case "1" -> migrateActors();
                 case "2" -> migrateCategories();
@@ -64,7 +56,8 @@ public class ThreadEmetteur extends Task {
     public void migrateActors() {
         System.out.println("Migration de Actor...");
         try {
-            List<Actor> actors = daoActor.findAll();
+            DAO<Actor> dao = (DAO<Actor>) this.getDao(Actor.class);
+            List<Actor> actors = dao.findAll();
             actors.forEach(actor -> {
                 eventManager.notify("event", new PersistDataCommand<Actor>(actor));
             });
@@ -77,7 +70,8 @@ public class ThreadEmetteur extends Task {
     public void migrateCategories() {
         System.out.println("Migration de Category...");
         try {
-            List<Category> categories = daoCategory.findAll();
+            DAO<Category> dao = (DAO<Category>) this.getDao(Category.class);
+            List<Category> categories = dao.findAll();
             categories.forEach(category -> {
                 eventManager.notify("Data", new PersistDataCommand<Category>(category));
             });
@@ -89,7 +83,8 @@ public class ThreadEmetteur extends Task {
     public void migrateFilms() {
         System.out.println("Migration de Film...");
         try {
-            List<Film> Films = daoFilm.findAll();
+            DAO<Film> dao = (DAO<Film>) this.getDao(Category.class);
+            List<Film> Films = dao.findAll();
             Films.forEach(film -> {
                 eventManager.notify("Data", new PersistDataCommand<Film>(film));
             });
