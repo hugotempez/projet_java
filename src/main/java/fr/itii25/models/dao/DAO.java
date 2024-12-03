@@ -12,18 +12,19 @@ public class DAO<T> {
 
     @PersistenceContext
     static protected EntityManager entityManager;
+    private final String persistenceUnitName;
 
     private final Class<T> persistentClass;
 
-    public static <T> DAO<T> of(Class<T> persistentClass) {
-        return new DAO<>(persistentClass);
+    public static <T> DAO<T> of(Class<T> persistentClass, String persistenceUnitName) {
+        return new DAO<>(persistentClass, persistenceUnitName);
     }
 
-    private DAO(Class<T> persistentClass) {
+    private DAO(Class<T> persistentClass, String persistenceUnitName) {
         this.persistentClass = persistentClass;
-
+        this.persistenceUnitName = persistenceUnitName;
         if (entityManager == null) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("input_sakila");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
             entityManager = emf.createEntityManager();
         }
     }

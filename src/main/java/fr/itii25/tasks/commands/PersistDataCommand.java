@@ -15,13 +15,13 @@ public class PersistDataCommand<T> implements Command {
 
     @Override
     public void execute(Task task) {
-//        try {
-//            DAO<T> dao = (DAO<T>) task.getDao(data.getClass());
-//            dao.create(data);
-//        }
-//        catch (ClassCastException | SQLException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            DAO<T> dao = (DAO<T>) task.getDao(data.getClass());
+            dao.create(data);
+        }
+        catch (ClassCastException | SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("Received command to persist " + data);
     }

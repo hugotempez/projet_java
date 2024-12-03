@@ -24,19 +24,19 @@
 
     <persistence-unit name="output_postgres" transaction-type="RESOURCE_LOCAL">
 
-        <description>Hibernate JPA Configuration</description>
+        <description>Hibernate JPA Configuration Postgres</description>
 
         <properties>
             <!-- TODO: Ajouter connexion à Postgres -->
-<!--            <property name="javax.persistence.jdbc.driver" value=""/>-->
-<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila"/>-->
-<!--            <property name="javax.persistence.jdbc.user" value="sakila"/>-->
-<!--            <property name="javax.persistence.jdbc.password" value="p_ssW0rd"/>-->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/app"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="example"/>
 
-<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>-->
-<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
-<!--            <property name="hibernate.show_sql" value="true"/>-->
-<!--            <property name="hibernate.format_sql" value="true"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

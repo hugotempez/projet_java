@@ -21,9 +21,9 @@ public class ThreadEmetteur extends Task {
     private EventManager eventManager;
 
     public ThreadEmetteur() {
-        daoActor = DAO.of(Actor.class);
-        daoCategory = DAO.of(Category.class);
-        daoFilm = DAO.of(Film.class);
+        daoActor = DAO.of(Actor.class, "input_sakila");
+        daoCategory = DAO.of(Category.class, "input_sakila");
+        daoFilm = DAO.of(Film.class, "input_sakila");
         eventManager = new EventManager();
     }
 
@@ -68,6 +68,7 @@ public class ThreadEmetteur extends Task {
             actors.forEach(actor -> {
                 eventManager.notify("event", new PersistDataCommand<Actor>(actor));
             });
+            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
