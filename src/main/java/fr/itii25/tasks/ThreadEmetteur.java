@@ -93,7 +93,6 @@ public class ThreadEmetteur extends Task {
             actors.forEach(actor -> {
                 eventManager.notify("event", new PersistDataCommand<Actor>(actor));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -107,7 +106,6 @@ public class ThreadEmetteur extends Task {
             address.forEach(addre -> {
                 eventManager.notify("event", new PersistDataCommand<Address>(addre));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -121,7 +119,6 @@ public class ThreadEmetteur extends Task {
             categories.forEach(category -> {
                 eventManager.notify("event", new PersistDataCommand<Category>(category));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -135,7 +132,6 @@ public class ThreadEmetteur extends Task {
             citys.forEach(city -> {
                 eventManager.notify("event", new PersistDataCommand<City>(city));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -149,7 +145,6 @@ public class ThreadEmetteur extends Task {
             countries.forEach(country -> {
                 eventManager.notify("event", new PersistDataCommand<Country>(country));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -163,7 +158,6 @@ public class ThreadEmetteur extends Task {
             customers.forEach(customer -> {
                 eventManager.notify("event", new PersistDataCommand<Customer>(customer));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -177,7 +171,6 @@ public class ThreadEmetteur extends Task {
             Films.forEach(film -> {
                 eventManager.notify("event", new PersistDataCommand<Film>(film));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -191,7 +184,6 @@ public class ThreadEmetteur extends Task {
             inventories.forEach(inventory -> {
                 eventManager.notify("event", new PersistDataCommand<Inventory>(inventory));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -205,7 +197,6 @@ public class ThreadEmetteur extends Task {
             languages.forEach(language -> {
                 eventManager.notify("event", new PersistDataCommand<Language>(language));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -219,7 +210,6 @@ public class ThreadEmetteur extends Task {
             payments.forEach(payment -> {
                 eventManager.notify("event", new PersistDataCommand<Payment>(payment));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -233,7 +223,6 @@ public class ThreadEmetteur extends Task {
             rentals.forEach(rental -> {
                 eventManager.notify("event", new PersistDataCommand<Rental>(rental));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -247,7 +236,6 @@ public class ThreadEmetteur extends Task {
             staffs.forEach(staff -> {
                 eventManager.notify("event", new PersistDataCommand<Staff>(staff));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -261,7 +249,6 @@ public class ThreadEmetteur extends Task {
             stores.forEach(store -> {
                 eventManager.notify("event", new PersistDataCommand<Store>(store));
             });
-            eventManager.notify("event", new StopCommand());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
