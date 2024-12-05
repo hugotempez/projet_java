@@ -6,18 +6,28 @@ import fr.itii25.tasks.Task;
 
 import java.sql.SQLException;
 
+/**
+ * Implémentation du design pattern Command pour l'échange de données
+ * @param <T>
+ */
 public class PersistDataCommand<T> implements Command {
 
-    private final T data;
+    private final T data;   //La donnée à échanger
 
     public PersistDataCommand(T data) {
         this.data = data;
     }
 
+    /**
+     * Persiste la data dans la table qui correspond a son type
+     * @param task
+     */
     @Override
     public void execute(Task task) {
         try {
+            //Récupération du DAO associé au type de la donnée
             DAO<T> dao = (DAO<T>) task.getDao(data.getClass(), DB.POSTGRES.getValue());
+            //Pérsistance de la donnée
             dao.create(data);
         }
         catch (ClassCastException | SQLException e) {

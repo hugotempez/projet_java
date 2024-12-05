@@ -9,7 +9,7 @@ public class Main {
         ThreadEmetteur emetteur = new ThreadEmetteur();
         ThreadRecepteur recepteur = new ThreadRecepteur();
 
-        emetteur.subscribe("event", recepteur);
+        emetteur.subscribe("event", recepteur); //Abonnement du recepteur aux evennements publiés par l'emetteur
 
         emetteur.start();
         recepteur.start();

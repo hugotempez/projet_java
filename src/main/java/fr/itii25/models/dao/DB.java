@@ -1,5 +1,8 @@
 package fr.itii25.models.dao;
 
+/**
+ * Représente les possibilités de connexion au SGBD (voir persistence.xml)
+ */
 public enum DB {
     SAKILA() {
         @Override

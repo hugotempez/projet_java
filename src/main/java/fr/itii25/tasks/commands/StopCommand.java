@@ -2,7 +2,15 @@ package fr.itii25.tasks.commands;
 
 import fr.itii25.tasks.Task;
 
+/**
+ * Implémentation du design pattern Command pour stoper l'échange de donnée
+ */
 public class StopCommand implements Command {
+
+    /**
+     *
+     * @param task
+     */
     @Override
     public void execute(Task task) {
         System.out.println("Stop command");

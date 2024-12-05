@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ThreadEmetteur extends Task {
 
-    private final EventManager eventManager;
+    private final EventManager eventManager;    //Gestion des évennements
 
     public ThreadEmetteur() {
         eventManager = new EventManager();
@@ -33,10 +33,16 @@ public class ThreadEmetteur extends Task {
         eventManager.subscribe(eventType, listener);
     }
 
+    /**
+     * Se désabonné de la liste des evenements de l'eventManager
+     * @param eventType type de l'évenement
+     * @param listener abonné que l'on souhaite désinscrire
+     */
     public void unsubscribe(String eventType, EventListener listener) {
         eventManager.unsubscribe(eventType, listener);
     }
 
+    //Redéfinition de la méthode run() de l'interface Runnable
     @Override
     public void run() {
         this.running = true;
@@ -80,6 +86,9 @@ public class ThreadEmetteur extends Task {
         }
     }
 
+    /**
+     * Appel les fonctions de migration pour chaque modèle
+     */
     private void migrateAll() {
         migrateActors();
         migrateAddress();
@@ -96,11 +105,18 @@ public class ThreadEmetteur extends Task {
         migrateStore();
     }
 
+    /**
+     * Permet de migrer la table "actor"
+     */
     private void migrateActors() {
         System.out.println("Migration de Actor...");
         try {
+            // Création d'une instance de DAO pour la class Actor
             DAO<Actor> dao = (DAO<Actor>) this.getDao(Actor.class, DB.SAKILA.getValue());
+            // Récupération des entrées de la table "actor" dans sakila
             List<Actor> actors = dao.findAll();
+            // Notification aux abonnées qu'un évennement de type "event"
+            // qui contient une PersistDataCommand<Actor> s'est produit
             actors.forEach(actor -> {
                 eventManager.notify("event", new PersistDataCommand<Actor>(actor));
             });
