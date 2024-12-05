@@ -12,6 +12,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 
+/**
+ * Tache chargée de la récupération des données dans la base Sakila
+ * Elle est controlée par le menu
+ */
 public class ThreadEmetteur extends Task {
 
     private final EventManager eventManager;
@@ -20,6 +24,11 @@ public class ThreadEmetteur extends Task {
         eventManager = new EventManager();
     }
 
+    /**
+     * Ajoute un abonné à la liste des evenements de l'eventManager
+     * @param eventType type de l'évenement auquel on souhaite s'abonner
+     * @param listener abonné que l'on souhaite ajouter
+     */
     public void subscribe(String eventType, EventListener listener) {
         eventManager.subscribe(eventType, listener);
     }
@@ -33,6 +42,7 @@ public class ThreadEmetteur extends Task {
         this.running = true;
 
         while (running) {
+            // Affichage du menu
             System.out.println("\n=== Menu ===");
             System.out.println("0. Tout");
             System.out.println("1. Actor\t\t2. Address");
@@ -43,9 +53,10 @@ public class ThreadEmetteur extends Task {
             System.out.println("11. Rental\t\t12. Staff");
             System.out.println("13. Store");
 
+            // Lecture de l'entrée utilisateur
             String choix = System.console().readLine("Votre choix: ");
 
-            switch (choix) {
+            switch (choix.toUpperCase()) {
                 case "0" -> migrateAll();
                 case "1" -> migrateActors();
                 case "2" -> migrateAddress();
@@ -64,7 +75,7 @@ public class ThreadEmetteur extends Task {
                     running = false;
                     eventManager.notify("event", new StopCommand());
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + choix);
+                default -> System.out.println("Votre choix est invalide !");
             }
         }
     }

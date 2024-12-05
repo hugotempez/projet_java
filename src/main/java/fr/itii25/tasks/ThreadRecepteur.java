@@ -20,7 +20,9 @@ public class ThreadRecepteur extends Task implements EventListener {
 
         while (this.running) {
             try {
+                // Attente de la prochaine commande disponible dans la Queue
                 Command command = commands.take();
+
                 command.execute(this);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

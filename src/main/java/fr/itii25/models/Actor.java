@@ -25,6 +25,15 @@ public class Actor {
     @ManyToMany(mappedBy = "actors", cascade = CascadeType.MERGE)
     private Set<Film> films = new LinkedHashSet<>();
 
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
