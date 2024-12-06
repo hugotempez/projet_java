@@ -23,6 +23,15 @@ public class EventManager {
      * @param listener "écouteur" des évennement
      */
     public void subscribe (String eventType, EventListener listener){
+        if (eventType == null || eventType.isEmpty()) {
+            System.out.println("Impossible de s'abonner, le type d'evenement est incorrect");
+            return;
+        }
+
+        if (listener == null) {
+            System.out.println("Impossible de s'abonner, le listener est incorrect");
+            return;
+        }
         listeners.computeIfAbsent(eventType, _ -> new ArrayList<>()).add(listener);
     }
 
@@ -41,6 +50,15 @@ public class EventManager {
      * @param command la commande qui est a éxecuté
      */
     public void notify (String eventType, Command command){
+        if (eventType == null || eventType.isEmpty()) {
+            System.out.println("Impossible de notifier l'evenement, Event type incorrect");
+        }
+
+        if (command == null) {
+            System.out.println("Impossible de notifier l'evenement, commande incorrecte");
+            return;
+        }
+
         List<EventListener> listenersToTopic = listeners.get(eventType);
         if (listenersToTopic == null) return;
 

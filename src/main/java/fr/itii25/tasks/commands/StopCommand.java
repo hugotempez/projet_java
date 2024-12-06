@@ -13,6 +13,10 @@ public class StopCommand implements Command {
      */
     @Override
     public void execute(Task task) {
+        if (task == null) {
+            System.out.println("Task is null");
+            return;
+        }
         System.out.println("Stop command");
         task.requestStop();
     }

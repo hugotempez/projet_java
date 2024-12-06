@@ -15,6 +15,9 @@ public class ThreadRecepteur extends Task implements EventListener {
 
     @Override
     public void update(Command command) {
+        if (command == null) {
+            return;
+        }
         commands.add(command);
     }
 
@@ -29,11 +32,11 @@ public class ThreadRecepteur extends Task implements EventListener {
             try {
                 // Attente de la prochaine commande disponible dans la Queue
                 Command command = commands.take();
-
                 command.execute(this); //Execution de la commande
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+        System.out.println("Fermeture du thread recepteur");
     }
 }

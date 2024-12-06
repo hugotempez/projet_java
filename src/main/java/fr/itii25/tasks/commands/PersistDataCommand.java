@@ -24,6 +24,10 @@ public class PersistDataCommand<T> implements Command {
      */
     @Override
     public void execute(Task task) {
+        if (task == null) {
+            System.out.println("Task is null");
+            return;
+        }
         try {
             //Récupération du DAO associé au type de la donnée
             DAO<T> dao = (DAO<T>) task.getDao(data.getClass(), DB.POSTGRES.getValue());

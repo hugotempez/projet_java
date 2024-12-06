@@ -84,6 +84,7 @@ public class ThreadEmetteur extends Task {
                 default -> System.out.println("Votre choix est invalide !");
             }
         }
+        System.out.println("Fermeture du thread emetteur");
     }
 
     /**
