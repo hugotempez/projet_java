@@ -20,7 +20,7 @@ public abstract class Task extends Thread {
      * @return le DAO corréspondant à la class demandé
      */
     public final DAO<?> getDao(Class<?> persistentClass, String persistenceUnitName) {
-        // Cherche le DAO correspondant à la classe peristante, s'il n'existe pas, il est créé, ajouté à la liste, puis retourné
+        // Cherche le DAO correspondant à la classe persistante, s'il n'existe pas, il est créé, ajouté à la liste, puis retourné
         return daos.computeIfAbsent(persistentClass,  _ -> DAO.of(persistentClass, persistenceUnitName));
     }
 
