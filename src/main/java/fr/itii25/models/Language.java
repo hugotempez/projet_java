@@ -19,6 +19,14 @@ public class Language {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Language{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Short getId() {
         return id;
     }

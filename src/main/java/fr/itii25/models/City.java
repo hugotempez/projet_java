@@ -16,6 +16,14 @@ public class City {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

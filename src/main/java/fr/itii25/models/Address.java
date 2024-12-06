@@ -28,6 +28,15 @@ public class Address {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

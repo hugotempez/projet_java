@@ -38,6 +38,15 @@ public class Staff {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
     public Short getId() {
         return id;
     }

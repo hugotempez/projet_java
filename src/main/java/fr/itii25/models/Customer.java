@@ -32,6 +32,16 @@ public class Customer {
     @Column(name = "last_update")
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

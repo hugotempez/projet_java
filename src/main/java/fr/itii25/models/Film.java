@@ -65,6 +65,17 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.MERGE)
     private Set<fr.itii25.models.Inventory> inventories = new LinkedHashSet<>();
 
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "title='" + title + '\'' +
+                ", actors=" + actors +
+                ", categories=" + categories +
+                ", id=" + id +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

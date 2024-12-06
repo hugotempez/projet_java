@@ -24,6 +24,16 @@ public class Payment {
     @Column(name = "last_update")
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", paymentDate=" + paymentDate +
+                ", amount=" + amount +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

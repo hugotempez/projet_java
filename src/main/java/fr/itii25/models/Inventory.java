@@ -17,6 +17,14 @@ public class Inventory {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "id=" + id +
+                ", film=" + film +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

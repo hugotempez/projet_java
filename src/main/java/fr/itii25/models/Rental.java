@@ -27,6 +27,15 @@ public class Rental {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id=" + id +
+                ", rentalDate=" + rentalDate +
+                ", customer=" + customer +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

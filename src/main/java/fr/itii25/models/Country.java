@@ -16,6 +16,14 @@ public class Country {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Country{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

@@ -21,6 +21,14 @@ public class Store {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", address=" + address +
+                '}';
+    }
+
     public Short getId() {
         return id;
     }

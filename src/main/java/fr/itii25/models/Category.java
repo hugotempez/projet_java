@@ -21,6 +21,14 @@ public class Category {
     @ManyToMany(mappedBy = "categories", cascade = CascadeType.MERGE)
     private Set<Film> films = new LinkedHashSet<>();
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Short getId() {
         return id;
     }
